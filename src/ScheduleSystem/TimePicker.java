@@ -38,8 +38,13 @@ public class TimePicker {
     public void initialize() {
         employees = Controller.getEmployees();
         currentEmployee = employees.get(0);
-        nameLabel.setText(currentEmployee.getName());
+        nameLabel.setText("Pick times that " + currentEmployee.getName() + " can work.");
         employees.remove(0);
+    }
+
+    @FXML
+    public void done(ActionEvent evt) {
+        hide(evt);
     }
 
     @FXML
