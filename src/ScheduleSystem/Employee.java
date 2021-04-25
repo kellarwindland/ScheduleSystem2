@@ -6,9 +6,13 @@ public class Employee {
     private String nameField;
     private Map<String, Boolean> timesAvailable = new HashMap<>();
     private Set<String> timesWillingToWork = new HashSet<>();
+    private int hours;
+    private boolean worked;
 
     public Employee(String name){
         nameField = name;
+        hours = 0;
+        worked = false;
     }
 
     public String getName() {
@@ -46,6 +50,31 @@ public class Employee {
 //            }
 //        }
 //    }
+
+    public boolean canWorkWeek(){
+        return hours < 25;
+    }
+
+    public boolean hasWorkedDay(){
+        return worked;
+    }
+
+    public void workedDay(){
+        worked = !worked;
+    }
+
+    public void newWeek(){
+        hours = 0;
+    }
+
+    public void newDay(){
+        worked = false;
+    }
+
+    public void adjustTotalHours(String time){
+        String[] nums = time.split("-");
+        hours += Math.abs(Integer.parseInt(nums[0]) - Integer.parseInt(nums[1]));
+    }
 
     public void setHours(Set<String> times){
         timesWillingToWork = times;

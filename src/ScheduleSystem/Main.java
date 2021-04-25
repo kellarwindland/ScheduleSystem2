@@ -10,8 +10,6 @@ import java.util.Scanner;
 
 public class Main extends Application {
 
-    public static final Scanner in = new Scanner(System.in);
-
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("ScheduleSystemUI.fxml"));
@@ -23,7 +21,6 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         launch(args);
-        in.close();
     }
 
 }

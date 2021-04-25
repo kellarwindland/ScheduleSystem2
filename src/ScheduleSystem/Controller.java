@@ -19,7 +19,7 @@ import java.util.logging.Logger;
 public class Controller {
 
     private static List<Employee> employees = new ArrayList<>();
-    private Logger logger = Logger.getLogger("Controller");
+    private final Logger logger = Logger.getLogger("Controller");
 
     @FXML
     private Button nextButton;
@@ -39,7 +39,6 @@ public class Controller {
     public void namePrompt(ActionEvent evt) {
         Employee tempEmployee = new Employee(nameText.getText());
         employees.add(tempEmployee);
-        // tempEmployee.hoursOff();
 
         logger.info("confirmed: " + tempEmployee.getName());
         resetNameText();
