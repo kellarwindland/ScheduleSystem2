@@ -31,14 +31,10 @@
             <VBox fx:id="checkBoxList" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
                <children>
                   <CheckBox fx:id="checkBox1" contentDisplay="CENTER" mnemonicParsing="false" text="10-4" />
-                  <CheckBox fx:id="checkBox2" mnemonicParsing="false" text="11-4" />
-                  <CheckBox fx:id="checkBox3" mnemonicParsing="false" text="4-8" />
-                  <CheckBox fx:id="checkBox4" mnemonicParsing="false" text="12-4" />
-                  <CheckBox fx:id="checkBox5" mnemonicParsing="false" text="11-3" />
-                  <CheckBox fx:id="checkBox6" mnemonicParsing="false" text="12-3" />
-                  <CheckBox fx:id="checkBox7" mnemonicParsing="false" text="5-7" />
-                  <CheckBox fx:id="checkBox8" mnemonicParsing="false" text="3-8" />
-                  <CheckBox fx:id="checkBox9" mnemonicParsing="false" text="2-7" />
+                  <CheckBox fx:id="checkBox2" mnemonicParsing="false" text="4-8" />
+                  <CheckBox fx:id="checkBox3" mnemonicParsing="false" text="5-7" />
+                  <CheckBox fx:id="checkBox4" mnemonicParsing="false" text="3-8" />
+                  <CheckBox fx:id="checkBox5" mnemonicParsing="false" text="2-7" />
                </children>
             </VBox>
             <Button fx:id="nextButton" alignment="CENTER" mnemonicParsing="false" onAction="#nextEmployee" text="Next Employee" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />

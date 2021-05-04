@@ -10,9 +10,17 @@ public class Day {
     private int hours;
     private Map<String, List<Employee>> schedule;
 
+    private Map<Employee, Integer> totalHours;
+
+    private int numberInMonth;
+    static int counter = 1;
+
     public Day(){
+        numberInMonth = counter;
+        counter++;
         hours = 5;
         schedule = new HashMap<>();
+        totalHours = new HashMap<>();
     }
 
     public boolean addEmployeeToSchedule(String time, Employee employee){
@@ -29,6 +37,17 @@ public class Day {
         }
         temp.add(employee);
         schedule.put(time, temp);
+
+        String[] nums = time.split("-");
+        int totalHoursTemp = Math.abs(Integer.parseInt(nums[0]) - Integer.parseInt(nums[1]));
+
+        if(totalHours.containsKey(employee)){
+            int currentHours = totalHours.get(employee);
+            currentHours += totalHoursTemp;
+            totalHours.put(employee, currentHours);
+        }else{
+            totalHours.put(employee, totalHoursTemp);
+        }
 
         return true;
     }
@@ -47,6 +66,15 @@ public class Day {
         }
 
         return result.toString();
+    }
+
+
+    public int getNumberInMonth(){
+        return numberInMonth;
+    }
+
+    public Map<Employee, Integer> getTotalHours(){
+        return totalHours;
     }
 
 }

@@ -30,9 +30,7 @@ public class TimePicker {
     @FXML
     private CheckBox checkBox1,
             checkBox2, checkBox3,
-            checkBox4, checkBox5,
-            checkBox6, checkBox7,
-            checkBox8, checkBox9;
+            checkBox4, checkBox5;
 
     @FXML
     private Label nameLabel;
@@ -50,7 +48,7 @@ public class TimePicker {
     private List<Week> createMonth(){
 
         List<Week> month = new ArrayList<>();
-        for(int i = 0; i < 4; i++){
+        for(int i = 0; i < 5; i++){
             month.add(new Week());
         }
 
@@ -63,7 +61,7 @@ public class TimePicker {
             Parent root = FXMLLoader.load(getClass().getResource("ScheduleDisplay.fxml"));
             Stage stage = new Stage();
             stage.setTitle("Scheduling System");
-            stage.setScene(new Scene(root, 900, 700));
+            stage.setScene(new Scene(root, 1100, 700));
             stage.show();
             hide(evt);
         }
@@ -89,17 +87,23 @@ public class TimePicker {
         for(Week week : weeks){
             for(Day day : week.getDays()){
 
-            while(!currentEmployee.hasWorkedDay()){
+                int count = 0;
+
+            while(currentEmployee.canWorkWeek() && !currentEmployee.hasWorkedDay() && !currentEmployee.getDays().contains(String.valueOf(day.getNumberInMonth())) && count < 400){
 
                 String[] arrayNumbers = currentEmployee.getHours().toArray(new String[0]);
                 Random rndm = new Random();
                 int rndmNumber = rndm.nextInt(currentEmployee.getHours().size());
                 String time = arrayNumbers[rndmNumber];
 
-                if(day.addEmployeeToSchedule(time, currentEmployee)) {
-                    currentEmployee.workedDay();
-                    currentEmployee.adjustTotalHours(time);
+                if(currentEmployee.getCanOpen() || !time.startsWith("10")){
+                    if(day.addEmployeeToSchedule(time, currentEmployee)) {
+                        currentEmployee.workedDay();
+                        currentEmployee.adjustTotalHours(time);
+                    }
                 }
+
+                count++;
             }
                 currentEmployee.newDay();
             }
@@ -116,10 +120,6 @@ public class TimePicker {
             checkBox3.setSelected(false);
             checkBox4.setSelected(false);
             checkBox5.setSelected(false);
-            checkBox6.setSelected(false);
-            checkBox7.setSelected(false);
-            checkBox8.setSelected(false);
-            checkBox9.setSelected(false);
         }else{
             done(evt);
         }

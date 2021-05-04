@@ -6,10 +6,18 @@ public class Employee {
     private String nameField;
     private Map<String, Boolean> timesAvailable = new HashMap<>();
     private Set<String> timesWillingToWork = new HashSet<>();
+    private Set<String> daysNotWillingToWork = new HashSet<>();
     private int hours;
     private boolean worked;
+    private boolean canOpen;
 
-    public Employee(String name){
+    public Employee(String name, String canOpenString){
+        if(canOpenString.equals("No")){
+            canOpen = false;
+        }else{
+            canOpen = true;
+        }
+
         nameField = name;
         hours = 0;
         worked = false;
@@ -18,38 +26,6 @@ public class Employee {
     public String getName() {
         return nameField;
     }
-
-//    private List<String> listHours(List<String> timeList){
-//        int count = 1;
-//        List<String> result = new ArrayList<>();
-//
-//        for (String time : times) {
-//            if(!timeList.contains(time)){
-//                System.out.println(count + ": " + time);
-//                count++;
-//                result.add(time);
-//            }
-//        }
-//
-//        return result;
-//    }
-
-//    public void hoursOff(){
-//        System.out.print("Are there hours that " + nameField + " does not want to work (0 = yes 1 = no): ");
-//        if(Main.in.nextInt() == 0){
-//            String temp = Main.in.nextLine();
-//            List<String> timeList = new ArrayList<>();
-//            while(!temp.equals("done")){
-//                List<String> currentTimes = listHours(timeList);
-//                System.out.print("Enter the number beside the time that cannot be worked, one at a time: ");
-//                timeList.add(currentTimes.get(Main.in.nextInt() - 1));
-//            }
-//
-//            for(String time : timeList){
-//                timesAvailable.put(time, false);
-//            }
-//        }
-//    }
 
     public boolean canWorkWeek(){
         return hours < 25;
@@ -80,8 +56,20 @@ public class Employee {
         timesWillingToWork = times;
     }
 
+    public void setDays(Set<String> days){
+        daysNotWillingToWork = days;
+    }
+
     public Set<String> getHours(){
         return timesWillingToWork;
+    }
+
+    public Set<String> getDays(){
+        return daysNotWillingToWork;
+    }
+
+    public boolean getCanOpen(){
+        return canOpen;
     }
 }
 
