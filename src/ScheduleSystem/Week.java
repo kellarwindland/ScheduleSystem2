@@ -47,10 +47,6 @@ public class Week {
         return result.toString();
     }
 
-    public boolean moreWorkHours(){
-        return hours < 41;
-    }
-
     public List<Day> getDays(){
         return days;
     }

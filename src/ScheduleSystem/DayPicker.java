@@ -6,7 +6,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
@@ -19,11 +18,7 @@ public class DayPicker {
 
     private List<Employee> employees = new ArrayList<>();
     private Employee currentEmployee;
-    private static List<Week> weeks;
     private int counter = 0;
-
-    @FXML
-    private Button doneButton;
 
     @FXML
     private VBox checkBoxList1, checkBoxList2, checkBoxList3, checkBoxList4;
@@ -41,7 +36,6 @@ public class DayPicker {
     @FXML
     public void initialize() {
         employees = Controller.getEmployees();
-        weeks = TimePicker.getWeeks();
         currentEmployee = employees.get(counter);
         counter++;
         nameLabel.setText("Pick days that " + currentEmployee.getName() + " cannot work.");

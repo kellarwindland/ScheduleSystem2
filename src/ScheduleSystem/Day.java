@@ -12,7 +12,7 @@ public class Day {
 
     private Map<Employee, Integer> totalHours;
 
-    private int numberInMonth;
+    private final int numberInMonth;
     static int counter = 1;
 
     public Day(){

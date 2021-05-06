@@ -18,8 +18,6 @@ public class TimePicker {
 
     private List<Employee> employees = new ArrayList<>();
     private Employee currentEmployee;
-    private static List<Week> weeks;
-    private static Map<Employee, Set<String>> employeeTimeMap = new HashMap<>();
     private int counter = 0;
 
     @FXML
@@ -37,12 +35,12 @@ public class TimePicker {
     public void initialize() {
 
         selectAll.selectedProperty().addListener((observable, oldValue, newValue) -> {
-            if(selectAll.isSelected()){
+            if (selectAll.isSelected()) {
                 checkBox1.setSelected(true);
                 checkBox2.setSelected(true);
                 checkBox3.setSelected(true);
                 checkBox4.setSelected(true);
-            }else{
+            } else {
                 checkBox1.setSelected(false);
                 checkBox2.setSelected(false);
                 checkBox3.setSelected(false);
@@ -55,17 +53,6 @@ public class TimePicker {
         nameLabel.setText("Pick times that " + currentEmployee.getName() + " can work.");
         counter++;
 
-        //weeks = createMonth();
-    }
-
-    private List<Week> createMonth(){
-
-        List<Week> month = new ArrayList<>();
-        for(int i = 0; i < 5; i++){
-            month.add(new Week());
-        }
-
-        return month;
     }
 
     @FXML
@@ -110,9 +97,6 @@ public class TimePicker {
         }
     }
 
-    public static List<Week> getWeeks(){
-        return weeks;
-    }
 
     private void hide(ActionEvent evt) {
         ((Node)evt.getSource()).getScene().getWindow().hide();
