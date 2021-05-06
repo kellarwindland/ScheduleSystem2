@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ScheduleSystem.ScheduleDisplay">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ScheduleSystem.ScheduleDisplay">
     <center>
         <GridPane prefHeight="100.0" prefWidth="1100.0" BorderPane.alignment="CENTER">
             <columnConstraints>
@@ -20,9 +20,10 @@
             <rowConstraints>
                 <RowConstraints maxHeight="200.0" minHeight="10.0" prefHeight="172.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="200.0" minHeight="10.0" prefHeight="154.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="200.0" minHeight="10.0" prefHeight="165.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="200.0" minHeight="10.0" prefHeight="150.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="200.0" minHeight="10.0" prefHeight="150.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="200.0" minHeight="10.0" prefHeight="156.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="200.0" minHeight="10.0" prefHeight="153.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="204.0" minHeight="10.0" prefHeight="172.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="200.0" minHeight="10.0" prefHeight="85.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <padding>
                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -107,6 +108,8 @@
             <Label fx:id="totalHours4" text="Label" GridPane.columnIndex="7" GridPane.rowIndex="3" />
             <Label fx:id="totalHours5" text="Label" GridPane.columnIndex="7" GridPane.rowIndex="4" />
             <Label text="Total Employee Hours" GridPane.columnIndex="7" GridPane.valignment="TOP" />
+            <Button fx:id="generateNew" mnemonicParsing="false" onAction="#generateSchedule" text="Generate New" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+            <Button fx:id="don" mnemonicParsing="false" onAction="#done" text="Done" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
          </children>
         </GridPane>
     </center>

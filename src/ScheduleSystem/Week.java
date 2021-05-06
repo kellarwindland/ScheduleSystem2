@@ -55,4 +55,10 @@ public class Week {
         return days;
     }
 
+    public void reset(){
+        for(Day day : days){
+            day.reset();
+        }
+    }
+
 }

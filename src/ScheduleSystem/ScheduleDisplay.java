@@ -1,11 +1,25 @@
 package ScheduleSystem;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class ScheduleDisplay {
+
+    private static List<Week> weeks;
+    private List<Employee> employees = new ArrayList<>();
+
+
 
     @FXML
     private Label label00, label01,label02,label03,label04,label05,label06,
@@ -27,7 +41,74 @@ public class ScheduleDisplay {
     @FXML
     public void initialize() {
 
-        List<Week> weeks = TimePicker.getWeeks();
+        employees = Controller.getEmployees();
+        weeks = createMonth();
+
+        changeSchedule();
+    }
+
+    private List<Week> createMonth(){
+
+        List<Week> month = new ArrayList<>();
+        for(int i = 0; i < 5; i++){
+            month.add(new Week());
+        }
+
+        return month;
+    }
+
+    @FXML
+    public void done(ActionEvent evt) {
+        hide(evt);
+    }
+
+    private void hide(ActionEvent evt) {
+        ((Node)evt.getSource()).getScene().getWindow().hide();
+    }
+
+    @FXML
+    private void generateSchedule(ActionEvent evt){
+        for(Employee currentEmployee : employees){
+            for(Week week : weeks){
+                for(Day day : week.getDays()){
+
+                    int count = 0;
+
+                    while(currentEmployee.canWorkWeek() && !currentEmployee.hasWorkedDay() && !currentEmployee.getDays().contains(String.valueOf(day.getNumberInMonth())) && count < 400){
+
+                        String[] arrayNumbers = currentEmployee.getHours().toArray(new String[0]);
+                        Random rndm = new Random();
+                        int rndmNumber = rndm.nextInt(currentEmployee.getHours().size());
+                        String time = arrayNumbers[rndmNumber];
+
+                        if(currentEmployee.getCanOpen() || !time.startsWith("10")){
+                            if(day.addEmployeeToSchedule(time, currentEmployee)) {
+                                currentEmployee.workedDay();
+                                currentEmployee.adjustTotalHours(time);
+                            }
+                        }
+
+                        count++;
+                    }
+                    currentEmployee.newDay();
+                }
+
+                currentEmployee.newWeek();
+            }
+
+            currentEmployee.reset();
+        }
+
+        changeSchedule();
+
+        for(Week week : weeks){
+            week.reset();
+        }
+
+    }
+
+
+    private void changeSchedule(){
         Week week = weeks.get(0);
         List<Day> days = week.getDays();
 
@@ -132,7 +213,6 @@ public class ScheduleDisplay {
         date46.setText(String.valueOf(days.get(6).getNumberInMonth()));
 
         totalHours5.setText(week.getTotalHours());
-
     }
 
 

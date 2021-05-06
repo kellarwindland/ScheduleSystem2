@@ -3,13 +3,12 @@ import java.util.*;
 
 public class Employee {
 
-    private String nameField;
-    private Map<String, Boolean> timesAvailable = new HashMap<>();
+    private final String nameField;
     private Set<String> timesWillingToWork = new HashSet<>();
     private Set<String> daysNotWillingToWork = new HashSet<>();
     private int hours;
     private boolean worked;
-    private boolean canOpen;
+    private final boolean canOpen;
 
     public Employee(String name, String canOpenString){
         if(canOpenString.equals("No")){
@@ -70,6 +69,11 @@ public class Employee {
 
     public boolean getCanOpen(){
         return canOpen;
+    }
+
+    public void reset(){
+        hours = 0;
+        worked = false;
     }
 }
 

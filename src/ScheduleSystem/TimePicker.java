@@ -20,9 +20,8 @@ public class TimePicker {
     private List<Employee> employees = new ArrayList<>();
     private Employee currentEmployee;
     private static List<Week> weeks;
-
-    @FXML
-    private Button doneButton;
+    private static Map<Employee, Set<String>> employeeTimeMap = new HashMap<>();
+    private int counter = 0;
 
     @FXML
     private VBox checkBoxList;
@@ -30,7 +29,7 @@ public class TimePicker {
     @FXML
     private CheckBox checkBox1,
             checkBox2, checkBox3,
-            checkBox4, checkBox5;
+            checkBox4;
 
     @FXML
     private Label nameLabel;
@@ -38,11 +37,11 @@ public class TimePicker {
     @FXML
     public void initialize() {
         employees = Controller.getEmployees();
-        currentEmployee = employees.get(0);
+        currentEmployee = employees.get(counter);
         nameLabel.setText("Pick times that " + currentEmployee.getName() + " can work.");
-        employees.remove(0);
+        counter++;
 
-        weeks = createMonth();
+        //weeks = createMonth();
     }
 
     private List<Week> createMonth(){
@@ -61,7 +60,7 @@ public class TimePicker {
             Parent root = FXMLLoader.load(getClass().getResource("ScheduleDisplay.fxml"));
             Stage stage = new Stage();
             stage.setTitle("Scheduling System");
-            stage.setScene(new Scene(root, 1100, 700));
+            stage.setScene(new Scene(root, 1200, 900));
             stage.show();
             hide(evt);
         }
@@ -82,44 +81,42 @@ public class TimePicker {
 
         currentEmployee.setHours(times);
 
-        System.out.println(currentEmployee.getHours().toString());
 
-        for(Week week : weeks){
-            for(Day day : week.getDays()){
-
-                int count = 0;
-
-            while(currentEmployee.canWorkWeek() && !currentEmployee.hasWorkedDay() && !currentEmployee.getDays().contains(String.valueOf(day.getNumberInMonth())) && count < 400){
-
-                String[] arrayNumbers = currentEmployee.getHours().toArray(new String[0]);
-                Random rndm = new Random();
-                int rndmNumber = rndm.nextInt(currentEmployee.getHours().size());
-                String time = arrayNumbers[rndmNumber];
-
-                if(currentEmployee.getCanOpen() || !time.startsWith("10")){
-                    if(day.addEmployeeToSchedule(time, currentEmployee)) {
-                        currentEmployee.workedDay();
-                        currentEmployee.adjustTotalHours(time);
-                    }
-                }
-
-                count++;
-            }
-                currentEmployee.newDay();
-            }
-
-            currentEmployee.newWeek();
-        }
-
-        if(!employees.isEmpty()){
-            currentEmployee = employees.get(0);
+//        for(Week week : weeks){
+//            for(Day day : week.getDays()){
+//
+//                int count = 0;
+//
+//            while(currentEmployee.canWorkWeek() && !currentEmployee.hasWorkedDay() && !currentEmployee.getDays().contains(String.valueOf(day.getNumberInMonth())) && count < 400){
+//
+//                String[] arrayNumbers = currentEmployee.getHours().toArray(new String[0]);
+//                Random rndm = new Random();
+//                int rndmNumber = rndm.nextInt(currentEmployee.getHours().size());
+//                String time = arrayNumbers[rndmNumber];
+//
+//                if(currentEmployee.getCanOpen() || !time.startsWith("10")){
+//                    if(day.addEmployeeToSchedule(time, currentEmployee)) {
+//                        currentEmployee.workedDay();
+//                        currentEmployee.adjustTotalHours(time);
+//                    }
+//                }
+//
+//                count++;
+//            }
+//                currentEmployee.newDay();
+//            }
+//
+//            currentEmployee.newWeek();
+//        }
+//
+        if(counter < employees.size()){
+            currentEmployee = employees.get(counter);
             nameLabel.setText("Pick times that " + currentEmployee.getName() + " can work.");
-            employees.remove(0);
+            counter++;
             checkBox1.setSelected(false);
             checkBox2.setSelected(false);
             checkBox3.setSelected(false);
             checkBox4.setSelected(false);
-            checkBox5.setSelected(false);
         }else{
             done(evt);
         }

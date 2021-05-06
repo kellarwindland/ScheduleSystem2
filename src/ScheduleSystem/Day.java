@@ -28,7 +28,9 @@ public class Day {
         if(schedule.containsKey(time)){
             temp = schedule.get(time);
 
-            if(temp.size() == 2){
+            if((time.startsWith("10") || time.startsWith("4")) && temp.size() == 2){
+                return false;
+            }else if((time.startsWith("3") || time.startsWith("5")) && temp.size() == 1){
                 return false;
             }
 
@@ -68,6 +70,10 @@ public class Day {
         return result.toString();
     }
 
+    public void reset(){
+        schedule = new HashMap<>();
+        totalHours = new HashMap<>();
+    }
 
     public int getNumberInMonth(){
         return numberInMonth;
