@@ -34,6 +34,7 @@
                   <CheckBox fx:id="checkBox2" mnemonicParsing="false" text="4-8" />
                   <CheckBox fx:id="checkBox3" mnemonicParsing="false" text="5-8" />
                   <CheckBox fx:id="checkBox4" mnemonicParsing="false" text="3-7" />
+                  <CheckBox fx:id="selectAll" mnemonicParsing="false" text="Select All" />
                </children>
             </VBox>
             <Button fx:id="nextButton" alignment="CENTER" mnemonicParsing="false" onAction="#nextEmployee" text="Next Employee" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />

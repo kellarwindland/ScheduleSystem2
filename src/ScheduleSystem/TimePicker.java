@@ -6,7 +6,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
@@ -29,13 +28,28 @@ public class TimePicker {
     @FXML
     private CheckBox checkBox1,
             checkBox2, checkBox3,
-            checkBox4;
+            checkBox4, selectAll;
 
     @FXML
     private Label nameLabel;
 
     @FXML
     public void initialize() {
+
+        selectAll.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if(selectAll.isSelected()){
+                checkBox1.setSelected(true);
+                checkBox2.setSelected(true);
+                checkBox3.setSelected(true);
+                checkBox4.setSelected(true);
+            }else{
+                checkBox1.setSelected(false);
+                checkBox2.setSelected(false);
+                checkBox3.setSelected(false);
+                checkBox4.setSelected(false);
+            }
+        });
+
         employees = Controller.getEmployees();
         currentEmployee = employees.get(counter);
         nameLabel.setText("Pick times that " + currentEmployee.getName() + " can work.");
@@ -75,40 +89,14 @@ public class TimePicker {
 
         for(Node tempNode : checkBoxList.getChildren()){
             if(tempNode instanceof CheckBox && ((CheckBox) tempNode).isSelected()){
-                times.add(((CheckBox) tempNode).getText());
+                if(!((CheckBox) tempNode).getText().equals("Select All")){
+                    times.add(((CheckBox) tempNode).getText());
+                }
             }
         }
 
         currentEmployee.setHours(times);
 
-
-//        for(Week week : weeks){
-//            for(Day day : week.getDays()){
-//
-//                int count = 0;
-//
-//            while(currentEmployee.canWorkWeek() && !currentEmployee.hasWorkedDay() && !currentEmployee.getDays().contains(String.valueOf(day.getNumberInMonth())) && count < 400){
-//
-//                String[] arrayNumbers = currentEmployee.getHours().toArray(new String[0]);
-//                Random rndm = new Random();
-//                int rndmNumber = rndm.nextInt(currentEmployee.getHours().size());
-//                String time = arrayNumbers[rndmNumber];
-//
-//                if(currentEmployee.getCanOpen() || !time.startsWith("10")){
-//                    if(day.addEmployeeToSchedule(time, currentEmployee)) {
-//                        currentEmployee.workedDay();
-//                        currentEmployee.adjustTotalHours(time);
-//                    }
-//                }
-//
-//                count++;
-//            }
-//                currentEmployee.newDay();
-//            }
-//
-//            currentEmployee.newWeek();
-//        }
-//
         if(counter < employees.size()){
             currentEmployee = employees.get(counter);
             nameLabel.setText("Pick times that " + currentEmployee.getName() + " can work.");
