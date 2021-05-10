@@ -26,7 +26,7 @@ public class TimePicker {
     @FXML
     private CheckBox checkBox1,
             checkBox2, checkBox3,
-            checkBox4, selectAll;
+            checkBox4,checkBox5, selectAll;
 
     @FXML
     private Label nameLabel;
@@ -40,11 +40,13 @@ public class TimePicker {
                 checkBox2.setSelected(true);
                 checkBox3.setSelected(true);
                 checkBox4.setSelected(true);
+                checkBox5.setSelected(true);
             } else {
                 checkBox1.setSelected(false);
                 checkBox2.setSelected(false);
                 checkBox3.setSelected(false);
                 checkBox4.setSelected(false);
+                checkBox5.setSelected(false);
             }
         });
 
@@ -61,7 +63,7 @@ public class TimePicker {
             Parent root = FXMLLoader.load(getClass().getResource("ScheduleDisplay.fxml"));
             Stage stage = new Stage();
             stage.setTitle("Scheduling System");
-            stage.setScene(new Scene(root, 1200, 900));
+            stage.setScene(new Scene(root, 1300, 1000));
             stage.show();
             hide(evt);
         }
@@ -92,6 +94,8 @@ public class TimePicker {
             checkBox2.setSelected(false);
             checkBox3.setSelected(false);
             checkBox4.setSelected(false);
+            checkBox5.setSelected(false);
+            selectAll.setSelected(false);
         }else{
             done(evt);
         }

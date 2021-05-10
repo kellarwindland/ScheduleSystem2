@@ -28,9 +28,9 @@ public class Day {
         if(schedule.containsKey(time)){
             temp = schedule.get(time);
 
-            if((time.startsWith("10") || time.startsWith("4")) && temp.size() == 2){
+            if(time.startsWith("4") && temp.size() == 2){
                 return false;
-            }else if((time.startsWith("3") || time.startsWith("5")) && temp.size() == 1){
+            }else if((time.startsWith("3") || time.startsWith("5") || time.startsWith("11") || time.startsWith("10")) && temp.size() == 1){
                 return false;
             }
 
